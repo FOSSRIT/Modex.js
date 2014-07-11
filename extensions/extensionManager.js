@@ -7,9 +7,9 @@ var extensionManager = function(extensionName){
 	//Used to make sure the extension is properly installed on the module.
 	base.init = function(module, method){
 		//
-		if(!module.extensions.jsonBuilder){
+		if(!module.extensions[extensionName]){
 			//You could also check dependencies/compatability issues here.
-			module.extensions.jsonBuilder = {};
+			module.extensions[extensionName] = {};
 		}
 		//If we've been sent in data indicating that this method is meant to only be called once.
 		if(method) {

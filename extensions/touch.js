@@ -40,6 +40,8 @@ var Touch = function(){
 
 	//Adds in events and sets them to bubble downward if they're colliding with sub-modules.
 	toReturn.Collisions = function(module){
+		base.init(module, "Collisions"); //Only add once.
+
 		for(var i=0; i<events.length; i++){
 			//Add the events.
 			var eventToAdd = events[i];
@@ -144,6 +146,8 @@ var Touch = function(){
 
 	//
 	toReturn.DragAndDrop = function(module){
+		base.init(module, "DragAndDrop"); //Only add once.
+
 		module.mouseOffset = {"x":0, "y":0}
 		module.lastMouse = {"x":0, "y":0}
 		module.interface.dragging = false;
@@ -180,6 +184,7 @@ var Touch = function(){
 	//mouseenter and mouseexit, that work how you would expect.
 	//
 	toReturn.onEnterExit = function(module) {
+		//base.init(module, "onEnterExit"); //Only add once.
 		//-------------------------------------------------
 		var _over = false;
 		module.addEvent("mouseover", function(_clipBoard) { 

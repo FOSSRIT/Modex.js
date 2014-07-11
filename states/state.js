@@ -2,7 +2,6 @@
 function State(_x, _y, _width, _height){
 	//------------------------------VARIABLES-------------------------------------
 	var base = Module(_x, _y, _width, _height); //Call base
-	Touch.Collisions(base);
 	base.interface.type = "State";
 	
 

@@ -3,7 +3,7 @@
 
 var jsonLoader = function(){
 	var base = extensionManager("jsonLoader");
-	var toReturn = base.Interface; //This works very similarly to how a module would work :)
+	var toReturn = base.interface; //This works very similarly to how a module would work :)
 
 	//This variable shouldn't ever be set.
 	var result = undefined;
