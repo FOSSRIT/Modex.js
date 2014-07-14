@@ -26,8 +26,10 @@ function CharacterSkeleton(_x, _y, _width, _height){
 	//order means draw order
 	//0 gets drawn first
 	var _slots = {
+		//template
 		"background": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":0},
 		"head": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":5},
+		//head
 		"hair": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":6},
 		"face": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":7},
 		"suit": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":1},
@@ -38,6 +40,7 @@ function CharacterSkeleton(_x, _y, _width, _height){
 		
 		//unused
 		"body": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":99},
+		"butt": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":69},
 	}
 	toReturn.slots = _slots;
 	
