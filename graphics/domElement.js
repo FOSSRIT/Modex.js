@@ -12,10 +12,13 @@ function DomWrapper(_domElement){
 
 
 	//Call base.
-	var base = Module(_domElement.style.left || 0, 
-		_domElement.style.top || 0, 
-		parseInt(_domElement.style.width || 0, 10), 
-		parseInt(_domElement.style.height || 0, 10));
+	if(_domElement.style){
+		var base = Module(_domElement.style.left || 0, _domElement.style.top || 0, 
+			parseInt(_domElement.style.width || 0, 10), 
+			parseInt(_domElement.style.height || 0, 10));
+	} else {
+		var base = Module(0, 0, 0, 0);
+	}
 
 	var toReturn = base.interface;
 	toReturn.type = "DomWrapper";
