@@ -213,7 +213,7 @@ var Touch = function(){
 	}
 
 
-	toReturn.DOMCollisions(module){
+	toReturn.DOMCollisions = function(module){
 		//If you have a dom element to return.
 		if(module.interface.getDom){
 			var dom = module.interface.getDom();
