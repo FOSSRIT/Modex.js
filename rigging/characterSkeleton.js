@@ -27,16 +27,28 @@ function CharacterSkeleton(_x, _y, _width, _height){
 	//0 gets drawn first
 	var _slots = {
 		//template
-		"background": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":0},
-		"head": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":5},
+		"background": 		{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":0},
+		"head": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":5},
 		//head
-		"hair": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":6},
-		"face": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":7},
-		"suit": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":1},
-		"shirt": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":2},
-		"pants": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":3},
-		"feet": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":4},
-		"accessories": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":8},
+		"face": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":6},
+		"hair": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":7},
+		"mask": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":15},
+		//suit
+		"jumpsuit": 		{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":2},
+		"cape": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":5},
+		"boots": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":6},
+		//shirt
+		"shirt": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":7},
+		"jacket": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":8},
+		"logo": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":9},
+		//pants
+		"pants": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":10},
+		"belt": 			{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":11},
+		"pants_accessory": 	{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":12},
+		//accessories
+		"arm_guards": 		{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":13},
+		"shin_guards": 		{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":14},
+		"hoods_and_helmets":{"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":16},
 		
 		//unused
 		"body": {"x":0, "y":0, "width":258, "height":655, "sprite":undefined, "order":99},
@@ -100,7 +112,7 @@ function CharacterSkeleton(_x, _y, _width, _height){
 				base.removeModule(toReturn.slots[slot].sprite);
 			}//
 
-
+			console.log(slot);
 			console.log("adding: " + toReturn.slots[slot].order);
 			base.addModule(sprite, toReturn.slots[slot].order);
 
