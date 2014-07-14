@@ -185,6 +185,7 @@ var Touch = function(){
 	//
 	toReturn.onEnterExit = function(module) {
 		//base.init(module, "onEnterExit"); //Only add once.
+		//Broken for now, this needs some reworking.
 		//-------------------------------------------------
 		var _over = false;
 		module.addEvent("mouseover", function(_clipBoard) { 
@@ -209,6 +210,17 @@ var Touch = function(){
 				} //endif Collision
 			}
 		});
+	}
+
+
+	toReturn.DOMCollisions(module){
+		//If you have a dom element to return.
+		if(module.interface.getDom){
+			var dom = module.interface.getDom();
+
+			//Add in relevant events.
+			//dom.addEventListener("")
+		}
 	}
 
 

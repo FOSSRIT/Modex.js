@@ -1,27 +1,43 @@
-var extensionManager = function(extensionName){
+var jsonBuilder = function(){
+	var base = extensionManager("jsonBuilder");
+	var toReturn = base.interface; //This works very similarly to how a module would work :)
 
-	var Public;
-	Public.Public = {}; //What the extension exposes to other people.
+	//This variable shouldn't ever be set.
+	var result = undefined;
 
-	//Used to make sure the extension is properly installed on the module.
-	Public.init = function(module, method){
-		//
-		if(!module.extensions.jsonBuilder){
-			//You could also check dependencies/compatability issues here.
-			module.extensions.jsonBuilder = {};
+
+	toReturn.Require = function(module, variableName) { //include default value, fail silently or publicly bool.
+		base.init(module, false);
+		//Check to see if we have a require list.
+		if(!module.extensions.jsonBuilder.required) {
+			module.extensions.jsonBuilder.required = {};
 		}
-		//If we've been sent in data indicating that this method is meant to only be called once.
-		if(method) {
-			//Check to see if the sub of whatever extension we're working with exists.
-			if(!module.extensions[extensionName][method]) {
-				//Mark the extension as having been called.
-				module.extensions[extensionName][method] = true; 
-			} else {
-				//Error message.
-				alert("attempt to call extension "+extensionName"."+method+" twice on the same module.  Extension has indicated that it should only be called once per module.");
-			}
-		}
+		//Add the list.
+		//Maybe change this to something better later.
+		module.extensions.jsonBuilder.required[variableName] = true;
 	}
 
-	return Public;
-}
+
+	toReturn.GetJson = function(module, json) {
+		base.init(module, false); //Maybe this shouldn't be false?
+
+
+		//If we have a required list.
+		if(module.extensions.jsonBuilder.required){
+			for (var r in module.extensions.jsonBuilder.required){
+				if(json["r"] == undefined) {
+					alert("Fatal Error: Module " + module.interface.type + " requires " + r + " to be specified in it's included JSON.")
+				}
+			}
+		} //Now that that's out of the way.
+
+		//save json in an accessible format.
+		base.jsonData = json;
+
+		//Maybe we could automatically build some stuff in the future.
+		//have some reserved variables or something.
+	}
+
+
+	return toReturn;
+}();
