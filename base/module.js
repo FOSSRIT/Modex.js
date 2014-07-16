@@ -143,7 +143,7 @@ function Module(_x, _y, _width, _height){
 				//if necessary, fire it off in this context.
 				if(toReturn.events[_toFire[i]]) {
 					for(var j=0; j<toReturn.events[_toFire[i]].call.length; j++) {
-						toReturn.events[_toFire[i]].call[j](_clipBoard); //May still have errors.
+						toReturn.events[_toFire[i]].call[j].call(this, _clipBoard); //May still have errors.
 					}
 				}
 				//Fire off to everyone else except _returnFrom
