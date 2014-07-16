@@ -68,6 +68,7 @@ function Module(_x, _y, _width, _height){
 
 
 	function _handleEvent(_eventString, _clipBoard) {
+
 		//If the event isn't blocked.  And if you're not set to block all events.
 		if((!toReturn.clipBoard.BlockEvents || toReturn.clipBoard.BlockEvents.indexOf(_eventString) !=-1) && toReturn.interface.recieveEvents) {
 			//If the event exists.
@@ -82,7 +83,7 @@ function Module(_x, _y, _width, _height){
 					//FOR POSTERITY:  If you're utalizing this part of the code - ie, calling a custom function
 					//and then passing down events on your own, you should probably set bubble to false.
 					//You can handle passing the event down and managing the clipboard in all likelyhood - bubble is mostly for automation's sake.
-					toReturn.events[_eventString].call[i](_clipBoard);
+					toReturn.events[_eventString].call[i].call(this, _clipBoard);
 
 				}
 			}
@@ -91,7 +92,7 @@ function Module(_x, _y, _width, _height){
 			if(toReturn.events["*"]) {
 				//See abover for logic.
 				for(var i=0; i<toReturn.events["*"].call.length; i++){
-					toReturn.events["*"].call[i](_clipBoard);
+					toReturn.events["*"].call[i].call(this, _clipBoard);
 				}
 			}
 

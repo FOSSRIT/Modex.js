@@ -17,8 +17,6 @@ function CurrentState(_x, _y, _width, _height){
 	
 	var _fireOnLoad = undefined;
 	var _contextForLoad = undefined;
-
-	base.addEvent("swapComponent", function() { " currentState recieved swapComponent"} );
 	
 	//------------------------------FUNCTIONS-------------------------------------
 

@@ -22,7 +22,7 @@ function Sprite(_x, _y, _width, _height, _imageSource, _xOrigin, _yOrigin) {
 
 
 	var image = new Image(); //Images are a thing here.
-	image.src = _imageSource || "images/error.png";
+	image.src = _imageSource || _modPath + "/images/error.png";
 	toReturn.events = base.events;
 
 	//--------------------------INTERNAL------------------------------------
@@ -44,6 +44,7 @@ function Sprite(_x, _y, _width, _height, _imageSource, _xOrigin, _yOrigin) {
 			if(_ctxForLoad) { _fireOnLoad(_ctxForLoad); } else { _fireOnLoad(this); }
 		}
 	}; image.onload = onImageLoad;
+	image.onerror = function(e) { alert("passed in bad address for image"); image.src = _modPath + "/images/error.png"; }
 
 	function _setLoad(_function, _ctx) {
 		_fireOnLoad = _function || false; _ctxForLoad = _ctx || false;
@@ -53,8 +54,8 @@ function Sprite(_x, _y, _width, _height, _imageSource, _xOrigin, _yOrigin) {
 
 	function _setImage(_image, setBounds, newX, newY, newWidth, newHeight) { 
 		//Works with both strings and actual images.
-		if(typeof(_image) == "string") {
-			image.src = _image; 
+		if(typeof(_image) == "string" || _image == undefined) {
+			image.src = _image || _modPath + "/images/error.png"; 
 			if(setBounds){
 				toReturn.bounds.width = image.width;
 				toReturn.bounds.height = image.height;
