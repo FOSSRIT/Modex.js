@@ -191,7 +191,10 @@ function Module(_x, _y, _width, _height){
 			_object.setLoad(false);
 			toReturn.contents[i].removeMe();
 			toReturn.contents.splice(i, 1);
+			return true;
 		}
+
+		return false;
 	}
 
 	function _addEvent(eventString, funct, bubble) {
