@@ -219,7 +219,11 @@ var Touch = function(){
 			var dom = module.interface.getDom();
 
 			//Add in relevant events.
-			//dom.addEventListener("")
+			for(var e in events){
+				dom.addEventListener(events[e], function(mouseEvent){
+					module.handleEvent(event[e], mouseEvent);
+				}, true);
+			}
 		}
 	}
 

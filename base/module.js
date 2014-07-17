@@ -135,7 +135,7 @@ function Module(_x, _y, _width, _height){
 
 		var _toFire = _clipBoard.ToFire;
 		_clipBoard.ToFire = [];
-		_fireArray = _fireArray.concat(_toFire);
+		_fireArray = _fireArray.concat(_toFire); //Copy out what is to fire next.
 
 		if(_toFire != undefined) {
 			for (var i=0; i<_toFire.length; i++){
@@ -146,15 +146,26 @@ function Module(_x, _y, _width, _height){
 						toReturn.events[_toFire[i]].call[j](_clipBoard); //May still have errors.
 					}
 				}
-				//Fire off to everyone else except _returnFrom
-				for(j= 0; j<toReturn.contents.length; j++){
-					if(toReturn.contents[j] != _returnFrom){ //Not the same module.
 
-						//Fire off if not blocked.
-						if(!toReturn.clipBoard.BlockEvents || toReturn.clipBoard.BlockEvents.indexOf(_toFire[i]) != -1){
-							toReturn.contents[j].handleEvent(_toFire[i], _clipBoard);
+				//At this point, we may check to see if we are meant to continue.
+
+
+				//If so.
+				if(!_clipBoard.BlockEvents || _clipBoard.BlockEvents.indexOf(_toFire[i]) == -1){
+					//Fire off to everyone else except _returnFrom
+					for(j= 0; j<toReturn.contents.length; j++){
+						if(toReturn.contents[j] != _returnFrom){ //Not the same module.
+
+							//Fire off if not blocked.
+							if(!toReturn.clipBoard.BlockEvents || toReturn.clipBoard.BlockEvents.indexOf(_toFire[i]) != -1){
+								toReturn.contents[j].handleEvent(_toFire[i], _clipBoard);
+							}
 						}
 					}
+
+				} else {
+					//Else, we should remove this event from toFire, so it is not returned to an above method.
+					_fireArray.splice(_fireArray.indexOf(_ToFire[i]))
 				}
 			}
 		}

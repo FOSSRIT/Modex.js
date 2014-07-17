@@ -33,9 +33,10 @@ var jsonBuilder = function(){
 
 		//save json in an accessible format.
 		module.jsonData = json;
-
 		//Maybe we could automatically build some stuff in the future.
 		//have some reserved variables or something.
+		//
+		return json;
 	}
 
 
