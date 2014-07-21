@@ -25,7 +25,7 @@ function DomWrapper(_domElement){
 	//toReturn.interface = true;
 	toReturn.loaded = true;
 	base.setRemove(function(){
-		_dom.style.visibility="hidden";
+		_dom.style.display="none";
 	});
 
 
@@ -42,9 +42,9 @@ function DomWrapper(_domElement){
 
 	function _draw(){
 		if(toReturn.visible){
-			_dom.style.visibility="visible";
+			_dom.style.display="block";
 		} else {
-			_dom.style.visibility="hidden";
+			_dom.style.display="none";
 		}
 
 		return [{
@@ -55,6 +55,11 @@ function DomWrapper(_domElement){
 			"height":toReturn.bounds.height,
 		}];
 	}
+
+	base.setRemove(function(){
+		this.visible = false;
+		_dom.style.display="none";
+	},this);
 
 	function _getDom(){
 		return _dom;

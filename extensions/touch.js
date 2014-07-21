@@ -213,18 +213,37 @@ var Touch = function(){
 	}
 
 
-	toReturn.DOMCollisions = function(module){
+	//Call this on submodules or yourself.  Both should work.
+	toReturn.DOMCollisions = function(module, dom){
 		//If you have a dom element to return.
-		if(module.interface.getDom){
-			var dom = module.interface.getDom();
+		//if(module.getDom){
+			//var dom = module.getDom();
 
 			//Add in relevant events.
 			for(var e in events){
-				dom.addEventListener(events[e], function(mouseEvent){
-					module.handleEvent(event[e], mouseEvent);
-				}, true);
+				(function(e){
+					dom.addEventListener(events[e], function(mouseEvent){
+						module.handleEvent(events[e], mouseEvent);
+					}, true);
+
+					module.addEvent(events[e], undefined, false);
+				})(e);
+
+
+				//Shouldn't fire off for mouseevents that just happened.
+				(function(e){
+					dom.addEventListener(events[e], function(mouseEvent){
+						if(mouseEvent.ToFire){
+							for(var f in mouseEvent.ToFire) {
+								module.handleEvent(mouseEvent.ToFire[f], mouseEvent);
+							}
+						}
+					}, false);
+				})(e);
 			}
-		}
+
+
+		//}
 	}
 
 

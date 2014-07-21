@@ -19,6 +19,7 @@ function Manager(_canvas, _ctx, _scale) {
 	//
 	var base = Module(0,0,1920,1080); //Call base
 	var toReturn = base.interface; //Set toReturn via base.
+	toReturn.type = "Manager";
 	Touch.Collisions(base);
 
 	//Switch methods.
