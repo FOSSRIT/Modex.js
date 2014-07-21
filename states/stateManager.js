@@ -9,10 +9,7 @@ function StateManager(_startingState) {
 	//Handles state changes.  I know eval is evil.  I'll allow it, for right now only.
 	base.addEvent("changeState", function(_clipBoard){ 
 
-		console.log('changing state');
-
 		_prevState = _currentState;
-		console.log(_clipBoard.stateInfo.to);
 		eval("_currentState = " + _clipBoard.stateInfo.to + "(_clipBoard.stateInfo.pass);");
 		base.removeModule(_prevState);
 		base.addModule(_currentState);
