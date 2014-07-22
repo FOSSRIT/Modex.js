@@ -219,20 +219,41 @@ var Touch = function(){
 		//if(module.getDom){
 			//var dom = module.getDom();
 
+			//Store that you've added these events.
+			if(dom.addedDomCollisions)
+			{
+				//Remove all events.
+				for(var e in dom.addedDomCollisions) {
+					for(var e_2 in dom.addedDomCollisions[e]) {
+						dom.removeEventListener(e, dom.addedDomCollisions[e][e_2].func, dom.addedDomCollisions[e][e_2].bubbleParam);
+					}
+				}
+
+			} else {
+				dom.addedDomCollisions = {}
+			}
+
 			//Add in relevant events.
 			for(var e in events){
+				if(!dom.addedDomCollisions[events[e]]) {
+					dom.addedDomCollisions[events[e]] = [];
+				}
 				(function(e){
-					dom.addEventListener(events[e], function(mouseEvent){
-						module.handleEvent(events[e], mouseEvent);
-					}, true);
 
+					var _add = function(mouseEvent){
+						module.handleEvent(events[e], mouseEvent);
+					} //
+					//Mark this function as being added.
+					dom.addedDomCollisions[events[e]].push({"dom":dom, "func":_add, "bubbleParam":true});
+					dom.addEventListener(events[e], _add, true);
 					module.addEvent(events[e], undefined, false);
 				})(e);
 
 
 				//Shouldn't fire off for mouseevents that just happened.
 				(function(e){
-					dom.addEventListener(events[e], function(mouseEvent){
+
+					var _add = function(mouseEvent){
 						if(mouseEvent.ToFire){
 							for(var f in mouseEvent.ToFire) {
 								var e = mouseEvent.ToFire[f];
@@ -241,7 +262,11 @@ var Touch = function(){
 								mouseEvent.ToFire.push(e);//Add back on so other modules can catch it.
 							}
 						}
-					}, false);
+					}
+					//Mark function as being added.
+					dom.addedDomCollisions[events[e]].push({"dom":dom, "func":_add, "bubbleParam":false});
+
+					dom.addEventListener(events[e], _add, false);
 				})(e);
 			}
 
