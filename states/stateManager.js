@@ -16,12 +16,18 @@ function StateManager(_startingState) {
 		//Gets rid of the screen flash effect by only changing states after the next one has loaded.
 		//Needs to have some errors fixed in load for modules.  Modules need a way to supress load events.
 		//_currentState.setLoad(function(){ base.removeModule(_prevState);  base.addModule(_currentState); console.log(base.contents.length);});
+		if(_currentState.init) {
+			_currentState.init();
+		}
 	}, false);
 
 	//And get us started.
 	var _currentState = _startingState;
 	var _prevState = undefined;
 	base.addModule(_currentState);
+	if(_currentState.init) {
+		_currentState.init();
+	}
 
 	//That was easy.
 	return toReturn;
