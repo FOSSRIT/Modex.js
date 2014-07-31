@@ -26,9 +26,12 @@ var ColorAdjust = function(){
 
 				//If there is a previous filter, remove it
 				if(Sprite.lastFilter) {
-					pix[i] = pix[i]*255/Sprite.lastFilter[r];
-					pix[i+1] = pix[i+1]*255/Sprite.lastFilter[g];
-					pix[i+2] = pix[i+2]*255/Sprite.lastFilter[b];
+					for (var i=0, n = pix.length; i < n; i += 4) {
+						pix[i] = pix[i]*255/Sprite.lastFilter.r;
+						pix[i+1] = pix[i+1]*255/Sprite.lastFilter.g;
+						pix[i+2] = pix[i+2]*255/Sprite.lastFilter.b;
+						//And alpha, which we can safely ignore.
+					}
 				}
 
 				//And set the new data.
@@ -36,7 +39,7 @@ var ColorAdjust = function(){
 
 
 				//And apply the new filter.
-				for(var i = 0, n = pix.length; i < n; i += 4) {
+				for(i = 0, n = pix.length; i < n; i += 4) {
 					pix[i] = r*pix[i]/255; //r
 					pix[i+1] = g*pix[i+1]/255//g
 					pix[i+2] = b*pix[i+2]/255//b

@@ -158,7 +158,6 @@ var Touch = function(){
 			module.mouseOffset.x = _clipBoard.mousex;
 			module.mouseOffset.y = _clipBoard.mousey;
 			module.interface.dragging = true;
-			console.log("startDrag");
 		}, false);
 		//
 		module.addEvent("mousemove", function(_clipBoard){

@@ -75,7 +75,7 @@ function Sprite(_x, _y, _width, _height, _imageSource, _xOrigin, _yOrigin) {
 		} else  {
 			image = _image;
 			//Add load event. If the image is loaded, fire off the load event.
-			image.onload = onImageLoad();
+			image.onload = onImageLoad;
 			if(image.complete) {
 				onImageLoad();
 			}
