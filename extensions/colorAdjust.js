@@ -4,10 +4,12 @@ var ColorAdjust = function(){
 
 
 	//R, G, and B range from 0 to 255, Sprite is the sprite module you want to change.
-	toReturn.multiplyFilter = function(r, g, b, Sprite)
+	//Reset is true or false depending on whether or not you want to take into account any previous changes.
+	toReturn.multiplyFilter = function(r, g, b, Sprite, reset)
 	{
 		//Only works on sprites.
 		if(Sprite.type = "Sprite") {
+
 			//Get relevant data
 			var data = Sprite.getData();
 			if(data.width != 0 && data.height != 0) {
@@ -25,7 +27,7 @@ var ColorAdjust = function(){
 
 
 				//If there is a previous filter, remove it
-				if(Sprite.lastFilter) {
+				if(Sprite.lastFilter && reset) {
 					for (var i=0, n = pix.length; i < n; i += 4) {
 						pix[i] = pix[i]*255/Sprite.lastFilter.r;
 						pix[i+1] = pix[i+1]*255/Sprite.lastFilter.g;
