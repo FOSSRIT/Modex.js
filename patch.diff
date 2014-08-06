@@ -1,0 +1,41 @@
+From 4d2ffd29c72dd39dceb04a5a377c20b8de4761ad Mon Sep 17 00:00:00 2001
+From: Daniel Shumway <shumway.danny@gmail.com>
+Date: Wed, 6 Aug 2014 14:15:36 -0400
+Subject: [PATCH] Modified the way dom elements are drawn so they respect
+ parent visibility.  Very happy about this.
+
+---
+ base/manager.js | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/base/manager.js b/base/manager.js
+index 77ced88..9e26fa6 100644
+--- a/base/manager.js
++++ b/base/manager.js
+@@ -73,9 +73,15 @@ function Manager(_canvas, _ctx, _scale) {
+ 
+ 
+ 	//Currently, very ineficient, but does allow for future expansion.
++	var domDrawn = []; //What dom we've drawn.
+ 	function _draw(){
+ 		//Clear the screen.
+ 		ctx.clearRect(0, 0, canvas.width, canvas.height);
++		for(var i=0; i<domDrawn.length; i++){
++			domDrawn[i].style.display = "none";
++		}
++		domDrawn = [];
++
+ 		//Loop through all objects and get list of sprites from them to return.
+ 		var toDraw = []; //Fill this with sprites.
+ 		for(var i=0; i<base.contents.length; i++){ //Theoretically, we could perform some oFpperations in here if need be.
+@@ -98,6 +104,7 @@ function Manager(_canvas, _ctx, _scale) {
+                 data.dom.style.top = ((data.y /*- data.originY*/) / toReturn.scale) + canvas.offsetTop;
+                 data.dom.style.width = data.width / toReturn.scale + "px";
+                 data.dom.style.height = data.height / toReturn.scale + "px";
++              	domDrawn.push(data.dom); //We've drawn this, the next time we do a redraw, we'll erase it.
+             }
+ 		}
+ 	}
+-- 
+1.8.4.msysgit.0
+
