@@ -22,7 +22,7 @@ function Module(_x, _y, _width, _height){
 		/*
 		"Event": {call:array of functions to call, bubble:is this function going to be passed down?},
 		*/
-	};
+	}; 
 
 	//-----------INTERNAL VARIABLES------------------------
 
